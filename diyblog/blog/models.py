@@ -1,4 +1,8 @@
 from django.db import models
+from django.urls import reverse
+    # Used to generate URLs by reversing the URL patterns
+import uuid
+    # Required for unique book instances
 
 # Create your models here.
 
@@ -11,6 +15,10 @@ class Blogger(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.username
+
+    def get_absolute_url(self):
+        """Returns the url to access a detail record for this blogger."""
+        return reverse('blogger-detail', args=[str(self.id)])
 
 class Blog(models.Model):
     """Model representing a blog post."""
@@ -31,3 +39,7 @@ class Blog(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.title
+
+    def get_absolute_url(self):
+        """Returns the url to access a detail record for this blog."""
+        return reverse('blog-detail', args=[str(self.id)])
